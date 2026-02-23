@@ -314,7 +314,7 @@ namespace svinkimer {
 			if (length_ >= capacity_) {
 				resize();
 			}
-			new (buf_ + length_) T(std::move(val)); // перемещаем объект в буфер
+			new (buf_ + length_) T(std::move(val));
 			return static_cast<int>(length_++);;
 		}
 
@@ -403,12 +403,10 @@ namespace svinkimer {
 				return ConstIterator(this, 0, true);
 			return ConstIterator(this, length_ - 1, true);
 		}
-
-		// Для немодифицируемого массива
+		
 		Iterator begin() { return Iterator(this, 0); }
 		Iterator end() { return Iterator(this, length_); }
 
-		// Для константного массива
 		ConstIterator cbegin() const { return ConstIterator(this, 0); }
 		ConstIterator cend()   const { return ConstIterator(this, length_); }
 
@@ -441,4 +439,5 @@ namespace svinkimer {
 		os << "]";
 		return os;
 	}
+
 }
